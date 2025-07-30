@@ -14,10 +14,9 @@ export const Basket = ({ showLink }: { showLink?: boolean }) => {
         ? <Link href="/checkout" className='basket'>Basket: {itemCount} item{itemCount !== 1 && 's'}</Link>
         : <p>Basket: {itemCount} item{itemCount !== 1 && 's'}</p>
       }
-      <ItemCount name="Item 1" count={items.find(item => item.name === 'Item 1')?.quantity || 0} />
-      <ItemCount name="Item 2" count={items.find(item => item.name === 'Item 2')?.quantity || 0} />
-      <ItemCount name="Item 3" count={items.find(item => item.name === 'Item 3')?.quantity || 0} />
-      <ItemCount name="Item 4" count={items.find(item => item.name === 'Item 4')?.quantity || 0} />
+      {items.map((item) => (
+        <ItemCount key={item.item.id} name={item.item.name.uk} count={item.quantity} />
+      ))}
     </div>
   )
 }

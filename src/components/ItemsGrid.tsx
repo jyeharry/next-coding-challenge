@@ -1,23 +1,28 @@
 'use client'
 
 import { useBasket } from "@/contexts/BasketContext";
+import { Product } from "@/types";
 
-const Item = ({ name, secondaryText, addToCart }: { name: string, secondaryText: string, addToCart: (item: string) => void }) =>
-  <button className='card' onClick={() => addToCart(name)} aria-label="Add to basket">
-    <h2>{name} <span>-&gt;</span></h2>
-    <p>{secondaryText}</p>
+const Item = ({ product, addToCart }: { product: Product, addToCart: (item: Product) => void }) =>
+  <button className='card' onClick={() => addToCart(product)} aria-label="Add to basket">
+    <h2>{product.name.uk} <span>-&gt;</span></h2>
+    <p suppressHydrationWarning>{currency('GBP', product.price.gbp)}</p>
   </button>
 
+const currency = (currencyCode: string, amount: number) => {
+  return new Intl.NumberFormat('gb-GB', {
+    style: 'currency',
+    currency: currencyCode,
+  }).format(amount);
+}
 
-export const ItemsGrid = () => {
+export const ItemsGrid = ({ initialItems }: { initialItems: Product[] }) => {
   const { addToCart } = useBasket();
   return (
     <div className='grid'>
-      <Item name='Item 1' secondaryText="Foo" addToCart={addToCart} />
-      <Item name='Item 2' secondaryText="Bar" addToCart={addToCart} />
-      <Item name='Item 3' secondaryText="Baz" addToCart={addToCart} />
-      <Item name='Item 4' secondaryText="Qux" addToCart={addToCart} />
+      {initialItems.map((item) => (
+        <Item key={item.id} product={item} addToCart={addToCart} />
+      ))}
     </div>
-
   )
 }
