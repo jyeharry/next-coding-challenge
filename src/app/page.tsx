@@ -9,7 +9,7 @@ export default function Home() {
         <p>
           Michael&apos;s Amazing Web Store
         </p>
-        <Basket />
+        <Basket showLink />
       </div>
 
       <ItemsGrid />

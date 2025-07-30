@@ -6,11 +6,14 @@ function ItemCount({ count, name }: { count: number, name: string }) {
   return <div key={name}>{name} count: {count}</div>
 };
 
-export const Basket = () => {
+export const Basket = ({ showLink }: { showLink?: boolean }) => {
   const { items, itemCount } = useBasket();
   return (
     <div>
-      <Link href="/checkout" className='basket'>Basket: {itemCount} item{itemCount !== 1 && 's'}</Link>
+      {showLink
+        ? <Link href="/checkout" className='basket'>Basket: {itemCount} item{itemCount !== 1 && 's'}</Link>
+        : <p>Basket: {itemCount} item{itemCount !== 1 && 's'}</p>
+      }
       <ItemCount name="Item 1" count={items.find(item => item.name === 'Item 1')?.quantity || 0} />
       <ItemCount name="Item 2" count={items.find(item => item.name === 'Item 2')?.quantity || 0} />
       <ItemCount name="Item 3" count={items.find(item => item.name === 'Item 3')?.quantity || 0} />
