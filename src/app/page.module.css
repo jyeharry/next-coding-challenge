@@ -5,6 +5,14 @@
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
+
+  @media (max-width: 700px) {
+    padding: 6rem 2rem;
+  }
+
+  @media (min-width: 701px) and (max-width: 1120px) {
+    padding: 6rem 3rem;
+  }
 }
 
 .description {
@@ -36,9 +44,9 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(25%, auto));
-  max-width: 100%;
-  width: var(--max-width);
+  grid-template-columns: repeat(4, 25%);
+  max-width: var(--max-width);
+  width: 100%;
 }
 
 .basket,
@@ -73,6 +81,7 @@
 
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
+
   .basket:hover,
   .card:hover {
     background: rgba(var(--card-rgb), 0.1);
@@ -97,7 +106,7 @@
   }
 
   .grid {
-    /* TODO Look up how to make a single column list*/
+    grid-template-columns: 100%;
     margin-bottom: 120px;
     max-width: 320px;
     text-align: center;
@@ -135,11 +144,9 @@
     border-radius: 0;
     border: none;
     border-bottom: 1px solid rgba(var(--callout-border-rgb), 0.25);
-    background: linear-gradient(
-      to bottom,
-      rgba(var(--background-start-rgb), 1),
-      rgba(var(--callout-rgb), 0.5)
-    );
+    background: linear-gradient(to bottom,
+        rgba(var(--background-start-rgb), 1),
+        rgba(var(--callout-rgb), 0.5));
     background-clip: padding-box;
     backdrop-filter: blur(24px);
   }
@@ -150,11 +157,9 @@
     inset: auto 0 0;
     padding: 2rem;
     height: 200px;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgb(var(--background-end-rgb)) 40%
-    );
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        rgb(var(--background-end-rgb)) 40%);
     z-index: 1;
   }
 }
@@ -162,6 +167,6 @@
 /* Tablet and Smaller Desktop */
 @media (min-width: 701px) and (max-width: 1120px) {
   .grid {
-    /* TODO Look up how to make a 2 column list*/
+    grid-template-columns: repeat(2, 50%);
   }
 }
