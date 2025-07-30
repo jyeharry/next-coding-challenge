@@ -19,7 +19,7 @@ const currency = (currencyCode: string, amount: number) => {
 
 export const ItemsGrid = ({ initialItems }: { initialItems: Product[] }) => {
   const { addToCart } = useBasket();
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['more-products'],
     queryFn: async () => {
       const res = await fetch('/api/more-products')
@@ -35,16 +35,17 @@ export const ItemsGrid = ({ initialItems }: { initialItems: Product[] }) => {
           <Item key={product.id} product={product} addToCart={addToCart} />
         ))}
       </div>
-      {data && (
-        <div style={{ maxWidth: 'var(--max-width)', width: '100%' }}>
-          <h3>More products</h3>
+      <div style={{ maxWidth: 'var(--max-width)', width: '100%' }}>
+        <h3>More products</h3>
+        {isLoading && <p>Loading...</p>}
+        {data && (
           <div className='grid'>
             {data.map((product) => (
               <Item key={product.id} product={product} addToCart={addToCart} />
             ))}
           </div>
-        </div >
-      )}
+        )}
+      </div >
     </>
   )
 }
