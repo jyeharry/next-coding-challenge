@@ -31,7 +31,7 @@ export default function Home() {
           Michael&apos;s Amazing Web Store
         </p>
         <div>
-          <button className={styles.basket}>Basket: {itemCount} items</button>
+          <button className={styles.basket}>Basket: {itemCount} item{itemCount !== 1 && 's'}</button>
           <ItemCount name="Item 1" count={items.find(item => item.name === 'Item 1')?.quantity || 0} />
           <ItemCount name="Item 2" count={items.find(item => item.name === 'Item 2')?.quantity || 0} />
           <ItemCount name="Item 3" count={items.find(item => item.name === 'Item 3')?.quantity || 0} />
