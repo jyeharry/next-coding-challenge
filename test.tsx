@@ -1,6 +1,6 @@
 import { act, render, screen } from '@testing-library/react';
 import Home from '@/app/page';
-import { BasketProvider } from '@/contexts/BasketContext';
+import { BasketProvider } from '@/providers/BasketProvider';
 import '@testing-library/jest-dom';
 
 describe('Home', () => {

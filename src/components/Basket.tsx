@@ -1,6 +1,6 @@
 'use client'
 import Link from "next/link"
-import { useBasket } from "@/contexts/BasketContext";
+import { useBasket } from "@/providers/BasketProvider";
 
 function ItemCount({ count, name }: { count: number, name: string }) {
   return <div key={name}>{name} count: {count}</div>

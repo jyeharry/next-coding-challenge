@@ -1,7 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { BasketProvider } from '@/contexts/BasketContext'
+import { BasketProvider } from '@/providers/BasketProvider'
+import { QueryProvider } from '@/providers/QueryProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <BasketProvider>
-          {children}
-        </BasketProvider>
+        <QueryProvider>
+          <BasketProvider>
+            {children}
+          </BasketProvider>
+        </QueryProvider>
       </body>
     </html>
   )
