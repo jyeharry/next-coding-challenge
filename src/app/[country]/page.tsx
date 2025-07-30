@@ -2,7 +2,7 @@ import styles from './page.module.css'
 import { Basket } from '@/components/Basket';
 import { ItemsGrid } from '@/components/ItemsGrid';
 
-export default async function Home() {
+export default async function Home({ params }: { params: { country: string } }) {
   const res = await fetch('https://v0-api-endpoint-request.vercel.app/api/products')
   const data = await res.json()
 

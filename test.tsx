@@ -1,5 +1,5 @@
 import { act, render, screen } from '@testing-library/react';
-import Home from '@/app/page';
+import Home from '@/app/[country]/page';
 import { BasketProvider } from '@/providers/BasketProvider';
 import '@testing-library/jest-dom';
 
