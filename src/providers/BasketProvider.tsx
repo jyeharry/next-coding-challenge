@@ -23,7 +23,7 @@ export function BasketProvider({ children }: { children: ReactNode }) {
     const alreadyInCart = items.find(item => item.item.id === product.id);
     if (alreadyInCart) {
       setItems(items.map(item =>
-        item.item === product
+        item.item.id === product.id
           ? { ...item, quantity: item.quantity + 1 }
           : item
       ));

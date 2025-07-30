@@ -1,9 +1,10 @@
 'use client'
+import { ValidCountry } from "@/types"
 import { createContext, useContext } from "react"
 
-const CountryCodeContext = createContext('gb')
+const CountryCodeContext = createContext<ValidCountry>('uk')
 
-export const CountryCodeProvider = ({ children, countryCode }: { children: React.ReactNode, countryCode: string }) => {
+export const CountryCodeProvider = ({ children, countryCode }: { children: React.ReactNode, countryCode: ValidCountry }) => {
   return (
     <CountryCodeContext.Provider value={countryCode}>
       {children}

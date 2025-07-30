@@ -1,4 +1,6 @@
-export type Product = {
+import { countryToCurrency } from "./utils"
+
+export type RawProduct = {
   id: number,
   name: {
     us: string,
@@ -10,3 +12,12 @@ export type Product = {
   },
   stock: number,
 }
+
+export type Product = {
+  id: number,
+  name: string,
+  price: number,
+  stock: number,
+}
+
+export type ValidCountry = keyof typeof countryToCurrency

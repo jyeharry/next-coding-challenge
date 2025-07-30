@@ -17,7 +17,7 @@ export const Basket = ({ showLink }: { showLink?: boolean }) => {
         : <p>Basket: {itemCount} item{itemCount !== 1 && 's'}</p>
       }
       {items.map((item) => (
-        <ItemCount key={item.item.id} name={item.item.name.uk} count={item.quantity} />
+        <ItemCount key={item.item.id} name={item.item.name} count={item.quantity} />
       ))}
     </div>
   )

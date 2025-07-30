@@ -1,28 +1,26 @@
 'use client'
 
 import { useBasket } from "@/providers/BasketProvider";
+import { useCountryCode } from "@/providers/CountryCodeProvider";
 import { Product } from "@/types";
 import { useQuery } from "@tanstack/react-query";
+import { Price } from "./Price";
 
 const Item = ({ product, addToCart }: { product: Product, addToCart: (item: Product) => void }) =>
   <button className='card' onClick={() => addToCart(product)} aria-label="Add to basket">
-    <h2>{product.name.uk} <span>-&gt;</span></h2>
-    <p suppressHydrationWarning>{currency('GBP', product.price.gbp)}</p>
+    <h2>{product.name} <span>-&gt;</span></h2>
+    <p suppressHydrationWarning>
+      <Price price={product.price} />
+    </p>
   </button>
-
-const currency = (currencyCode: string, amount: number) => {
-  return new Intl.NumberFormat(undefined, {
-    style: 'currency',
-    currency: currencyCode,
-  }).format(amount);
-}
 
 export const ItemsGrid = ({ initialItems }: { initialItems: Product[] }) => {
   const { addToCart } = useBasket();
+  const country = useCountryCode();
   const { data, isLoading } = useQuery({
-    queryKey: ['more-products'],
+    queryKey: ['more-products', country],
     queryFn: async () => {
-      const res = await fetch('/api/more-products')
+      const res = await fetch(`${country}/api/more-products`)
       const data = await res.json()
       return data.products as Product[]
     }
