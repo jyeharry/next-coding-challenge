@@ -2,18 +2,22 @@
 import { useState } from 'react';
 import styles from './page.module.css'
 
-function ItemCount({count, name}: {count: number, name: string}) {
+function ItemCount({ count, name }: { count: number, name: string }) {
   return <div key={name}>{name} count: {count}</div>
 };
 
 export default function Home() {
-  const [items, setItems] = useState<{name: string, quantity: number}[]>([]);
+  const [items, setItems] = useState<{ name: string, quantity: number }[]>([]);
   const [itemCount, setItemCount] = useState<number>(0);
 
   const addToCart = (product: string) => {
     const alreadyInCart = items.find(item => item.name === product);
     if (alreadyInCart) {
-      // @TODO need to find out how to update cart items
+      setItems(items.map(item =>
+        item.name === product
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      ));
     } else {
       setItems([...items, { name: product, quantity: 1 }]);
     }
@@ -28,10 +32,10 @@ export default function Home() {
         </p>
         <div>
           <button className={styles.basket}>Basket: {itemCount} items</button>
-          <ItemCount name="Item 1" count={items.find(item=> item.name === 'Item 1')?.quantity || 0}/>
-          <ItemCount name="Item 2" count={items.find(item=> item.name === 'Item 2')?.quantity || 0}/>
-          <ItemCount name="Item 3" count={items.find(item=> item.name === 'Item 3')?.quantity || 0}/>
-          <ItemCount name="Item 4" count={items.find(item=> item.name === 'Item 4')?.quantity || 0}/>
+          <ItemCount name="Item 1" count={items.find(item => item.name === 'Item 1')?.quantity || 0} />
+          <ItemCount name="Item 2" count={items.find(item => item.name === 'Item 2')?.quantity || 0} />
+          <ItemCount name="Item 3" count={items.find(item => item.name === 'Item 3')?.quantity || 0} />
+          <ItemCount name="Item 4" count={items.find(item => item.name === 'Item 4')?.quantity || 0} />
         </div>
       </div>
 
